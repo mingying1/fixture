@@ -2,14 +2,17 @@ import pytest
 import yaml
 
 from pytest_mode1.calc import Calculator
-
+#打开calc文件
 with open('./calc.yml') as f:
-    #读取add中的数据
+    #使用safe_laod读取add中的数据
     datas = yaml.safe_load(f)['add']
+    #取出datas数据
     adddatas = datas['datas']
     print(adddatas)
+    #取出myid数据
     myid = datas['myid']
     print(myid)
+# 打开calc文件
 with open('./calc.yml') as a:
     #读取div中的数据
     divdatas = yaml.safe_load(a)['div']
@@ -17,25 +20,25 @@ with open('./calc.yml') as a:
     print(divdata)
     divmyid = divdatas['myid']
     print(divmyid)
-
+#顶一个计算类
 class Testcalc():
-
+    #类级别前的准备工作使用setup_class定义
     def setup_class(self):
         print("类级别开始计算")
         #实例化计算器
         self.calc = Calculator()
-
+    #类级别的结束清理方法使用teardown_class定义
     def teardown_class(self):
         print("类级别结束计算")
-
+    #方法级别的开始计算
     def setup(self):
         print('开始计算')
-
+    #方法级别的结束计算
     def teardown(self):
             print('结束计算')
 
 
-        #参数化
+    #参数化
     @pytest.mark.parametrize('a,b,expect',adddatas,ids=myid)
 
 
@@ -57,6 +60,7 @@ class Testcalc():
             return expect
 
         result = self.calc.div(a,b)
+
 
         # 断言
         assert expect == result
