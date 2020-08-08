@@ -40,30 +40,31 @@ with open('test_calc.yml') as c:
 
 # 使用fixture生成add的别名
 @pytest.fixture(params=adddatas, ids=myid)
+# 定义获取add中data的方法
 def get_datas(request):
     data = request.param
     print('data')
     return data
 
-
 # 使用fixture生成div的别名
 @pytest.fixture(params=divdata, ids=divmyid)
+#定义获取div中data的方法
 def get_divdatas(request):
     datas = request.param
     print('datas')
     return datas
 
-
 # 使用fixture生成sub的别名
 @pytest.fixture(params=subdata, ids=submyid)
+#定义获取sul中data的方法
 def get_subdatas(request):
     datas = request.param
     print('datas')
     return datas
 
-
 # 使用fixture生成mul的别名
 @pytest.fixture(params=muldata, ids=mulmyid)
+#定义获取mul中data的方法
 def get_muldatas(request):
     datas = request.param
     print('datas')
@@ -96,17 +97,16 @@ class Testcalc():
     # 参数化
     # @pytest.mark.parametrize('a,b,expect',adddatas,ids=myid)
 
-    # 定义add方法
+    # 定义add方法,从conftest中取得get_calc,使用get_datas进行参数化
     def test_add(self, get_calc, get_datas):
         try:
-
             result = get_calc.add(get_datas[0], get_datas[1])
-            print("===========")
             print(result)
             # 判断result为小数的时候使用round取小数点后两位
             if isinstance(result, float):
                 result = round(result, 2)
         except:
+            #判断参数中有为str类型的,打印不支持字符串,否则打印参数
             if isinstance(get_datas[0], str) or isinstance(get_datas[1], str):
                 print("不支持字符串")
                 return
@@ -126,6 +126,7 @@ class Testcalc():
                 print("除数不能为0")
                 return
         except:
+            # 判断参数中有为str类型的,打印不支持字符串,否则打印参数
             if isinstance(get_divdatas[0], str) or isinstance(get_divdatas[1], str):
                 print("不支持字符串")
                 return
@@ -149,6 +150,7 @@ class Testcalc():
                 result = round(result, 2)
             # 判断如果参数为字符型,打印不支持字符型
         except:
+            # 判断参数中有为str类型的,打印不支持字符串,否则打印参数
             if isinstance(get_subdatas[0], str) or isinstance(get_subdatas[1], str):
                 print("不支持字符串")
                 return
@@ -169,6 +171,7 @@ class Testcalc():
                 result = round(result, 6)
                 # 判断如果参数为字符型,打印不支持字符型
         except:
+            # 判断参数中有为str类型的,打印不支持字符串,否则打印参数
             if isinstance(get_muldatas[0], str) or isinstance(get_muldatas[1], str):
                 print("不支持字符串")
                 return
@@ -176,4 +179,5 @@ class Testcalc():
                 print(get_muldatas[0])
                 print(get_muldatas[1])
                 print('请输入正确的数据类型')
+                #断言
             assert get_muldatas[2] == result
