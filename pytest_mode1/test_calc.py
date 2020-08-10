@@ -98,6 +98,8 @@ class Testcalc():
     # @pytest.mark.parametrize('a,b,expect',adddatas,ids=myid)
 
     # 定义add方法,从conftest中取得get_calc,使用get_datas进行参数化
+    # 控制测试用例执行顺序
+    @pytest.mark.run(order=1)
     def test_add(self, get_calc, get_datas):
         try:
             result = get_calc.add(get_datas[0], get_datas[1])
@@ -106,7 +108,7 @@ class Testcalc():
             if isinstance(result, float):
                 result = round(result, 2)
         except:
-            #判断参数中有为str类型的,打印不支持字符串,否则打印参数
+            # 判断参数中有为str类型的,打印不支持字符串,否则打印参数
             if isinstance(get_datas[0], str) or isinstance(get_datas[1], str):
                 print("不支持字符串")
                 return
@@ -118,6 +120,8 @@ class Testcalc():
             assert get_datas[2] == result
 
     # @pytest.mark.parametrize('a,b,expect',divdata,ids=divmyid)
+    # 控制测试用例执行顺序
+    @pytest.mark.run(order=4)
     # 定义div方法
     def test_div(self, get_calc, get_divdatas):
         try:
@@ -140,6 +144,8 @@ class Testcalc():
             assert get_divdatas[2] == result
 
     # @pytest.mark.parametrize('a,b,expect',subdata,ids=submyid)
+    # 控制测试用例执行顺序
+    @pytest.mark.run(order=2)
     # 定义sub方法
     def test_sub(self, get_calc, get_subdatas):
         try:
@@ -162,6 +168,8 @@ class Testcalc():
             assert get_subdatas[2] == result
 
     # @pytest.mark.parametrize('a,b,expect',muldata,ids=mulmyid)
+    # 控制测试用例执行顺序
+    @pytest.mark.run(order=3)
     # 定义mul方法
     def test_mul(self, get_calc, get_muldatas):
         try:
