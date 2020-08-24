@@ -1,8 +1,6 @@
 import pytest
 
 from pytest_mode4.test_project.pages.main_page import MainPage
-
-
 class TestAddmenber:
     def setup_class(self):
         self.main = MainPage()

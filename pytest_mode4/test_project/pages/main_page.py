@@ -4,8 +4,6 @@ from selenium.webdriver.common.by import By
 from pytest_mode4.test_project.pages.addmember_page import AddmemberPage
 
 from pytest_mode4.test_project.pages.base import Base
-
-
 # 企业微信主页类
 class MainPage(Base):
     _base_url = "https://work.weixin.qq.com/wework_admin/frame#index"
@@ -30,11 +28,10 @@ class MainPage(Base):
         self.find(*self._addmember).click()
 
         return AddmemberPage(self.driver)
-
     # 定义方法去到导入通讯录页面
     def go_to_importcontacts(self):
         self.driver.get(self._base_url)
         self.find(*self._index_service_cnt_itemWrap).click()
-
         from pytest_mode4.test_project.pages.importcontacts_page import ImportcontactsPage
         return ImportcontactsPage(self.driver)
+
