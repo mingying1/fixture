@@ -15,6 +15,7 @@ class DepartmentSearch(BasePage):
     result_element = (MobileBy.XPATH, "//*[@text='{name}']")
     element = (MobileBy.ID, 'com.tencent.wework: id / hqj')
 
+
     # 搜索并输入name
     def search_send_name(self, name):
         # name = "测试1"
@@ -24,7 +25,9 @@ class DepartmentSearch(BasePage):
 
         self.show_wait(self.element)
 
-        ele = self.driver.find_elements(MobileBy.XPATH, f"//*[@text='{name}']")
+        # ele = self.driver.find_elements(MobileBy.XPATH, f"//*[@text='{name}']")
+        ele = self.finds(self.find_by_text(name))
+
         beforenum = len(ele)
         if beforenum < 2:
             print("没有可删除的人员")

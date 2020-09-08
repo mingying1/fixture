@@ -52,3 +52,7 @@ class BasePage:
     def show_wait(self, element):
         # 显示等待元素可见
         return WebDriverWait(self.driver, 10).until(expected_conditions.invisibility_of_element_located(element))
+
+    def find_by_text(self, text):
+        element = (MobileBy.XPATH, f"//*[@text='{text}']")
+        return element
