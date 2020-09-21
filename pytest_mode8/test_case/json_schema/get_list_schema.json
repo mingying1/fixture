@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "errcode": 0,
+      "errmsg": "ok",
+      "taglist": [
+        {
+          "tagid": 12,
+          "tagname": "UI"
+        }
+      ]
+    }
+  ],
+  "required": [
+    "errcode",
+    "errmsg",
+    "taglist"
+  ],
+  "properties": {
+    "errcode": {
+      "$id": "#/properties/errcode",
+      "type": "integer",
+      "title": "The errcode schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "errmsg": {
+      "$id": "#/properties/errmsg",
+      "type": "string",
+      "title": "The errmsg schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "ok"
+      ]
+    },
+    "taglist": {
+      "$id": "#/properties/taglist",
+      "type": "array",
+      "title": "The taglist schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "tagid": 12,
+            "tagname": "UI"
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/taglist/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/taglist/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "tagid": 12,
+                "tagname": "UI"
+              }
+            ],
+            "required": [
+              "tagid",
+              "tagname"
+            ],
+            "properties": {
+              "tagid": {
+                "$id": "#/properties/taglist/items/anyOf/0/properties/tagid",
+                "type": "integer",
+                "title": "The tagid schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                  12
+                ]
+              },
+              "tagname": {
+                "$id": "#/properties/taglist/items/anyOf/0/properties/tagname",
+                "type": "string",
+                "title": "The tagname schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "UI"
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}
